@@ -1,0 +1,223 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Swagger API Test",
+        "description": "Test my swagger-api",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Bikers",
+            "description": "API for bikers in the system"
+        },
+        {
+            "name": "Biker",
+            "description": "API for specific biker in the system"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/swaggerTest/bikers": {
+            "get": {
+                "tags": [
+                    "Bikers"
+                ],
+                "summary": "Get all bikers in system.",
+                "oprationId": "getBikers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bikers"
+                        }
+                    }
+                }
+            }
+        },
+        "/swaggerTest/biker/create": {
+            "post": {
+                "tags": [
+                    "Biker"
+                ],
+                "summary": "Create a new biker.",
+                "description": "Post a biker object for create a biker.",
+                "oprationId": "createBiker",
+                "parameters": [
+                    {
+                        "name": "biker",
+                        "in": "body",
+                        "request": true,
+                        "description": "Biker object.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }                        
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Object created.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }
+                    },
+                    "400": {
+                        "description": "Post data failed."
+                    }
+                }
+            }
+        },
+        "/swaggerTest/biker/{id}": {
+            "get": {
+                "tags": [
+                    "Biker"
+                ],
+                "summary": "Find biker by id.",
+                "description": "Get a sepcific biker.",
+                "oprationId": "getBiker",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of biker to return",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Object found.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }
+                    },
+                    "404": {
+                        "description": "Id for biker not found."
+                    }
+                }
+            }
+        },
+        "/swaggerTest/biker/{id}/update": {
+            "put": {
+                "tags": [
+                    "Biker"
+                ],
+                "summary": "Update a biker.",
+                "description": "Put a biker object for update a biker.",
+                "oprationId": "updateBiker",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "request": true,
+                        "description": "ID for findding biker object.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }
+                    },
+                    {
+                        "name": "biker",
+                        "in": "body",
+                        "request": true,
+                        "description": "Biker object.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Object updated.",
+                        "schema": {
+                            "$ref": "#/definitions/Biker"
+                        }
+                    },
+                    "400": {
+                        "description": "Update biker failed."
+                    },
+                    "404": {
+                        "description": "Id for biker not found."
+                    }
+                }
+            }
+        },
+        "/swaggerTest/biker/{id}/delete": {
+            "delete": {
+                "tags": [
+                    "Biker"
+                ],
+                "summary": "Delete a biker.",
+                "description": "Delete a biker object.",
+                "oprationId": "delteBiker",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "request": true,
+                        "description": "ID for findding biker object.",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Object deleted."
+                    },
+                    "404": {
+                        "description": "Id for biker not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "Biker": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "Age": {
+                    "type": "number"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "Bike":{
+                    "type": "string"
+                }
+            }
+        },
+        "Bikers": {
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/Biker"
+            }
+        }
+    }
+}
